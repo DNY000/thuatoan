@@ -4,7 +4,7 @@ void main() {
   // var a = [3, 10, 2, 1, 20];
   // // print(maxDifferenceBetween(a));
   // print(longestIncreasingSubsequence(a));
-  var str = ['duy', 'tran', 'huy', 'an'];
+  var str = ['duy', 'tran', 'huy', 'annnn'];
   // print(largestOverlap(str));
   // var nums = [1, 2, 3, 7, 8, 20];
   // print(smallestPositiveInteger(nums));
@@ -197,7 +197,7 @@ List<String> sortByDistinctChars(List<String> str) {
       if (a.length != b.length) {
         return a.length.compareTo(b.length);
       }
-      return a.length.compareTo(b.length);
+      return a.compareTo(b);
     },
   );
   return str;
