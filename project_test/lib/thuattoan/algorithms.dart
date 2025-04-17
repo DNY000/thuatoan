@@ -171,32 +171,16 @@ VD:
     if (nums.isEmpty) {
       return 0;
     }
-
-    // If there's only one element, return it.
     if (nums.length == 1) {
       return nums[0];
     }
-
-    // dp array to store the maximum sum at each index
     List<int> dp = List.filled(nums.length, 0);
-
-    // Base case: the first element in the dp array is the first element in the input array
     dp[0] = nums[0];
-
-    // Second element: It's either the first element or the second element itself
     dp[1] = nums[1] > nums[0] ? nums[1] : dp[0];
-
-    // Fill the dp array by iterating through the list
     for (int i = 2; i < nums.length; i++) {
-      // Option 1: Don't include nums[i-1] (skip it)
-      // Option 2: Include nums[i], skip nums[i-1], and add it to dp[i-2]
       dp[i] = nums[i] + (nums[i - 1] != nums[i] - 1 ? dp[i - 2] : 0);
-
-      // Option 3: Max of excluding the current number, or including it
       dp[i] = nums[i] > dp[i - 1] ? dp[i] : dp[i - 1];
     }
-
-    // The maximum sum will be the last element in dp
     return dp[nums.length - 1];
   }
 
@@ -276,16 +260,13 @@ smallest positive integer that cannot be represented as the sum of any subset
   static int smallestPositiveIntegerNoConsecutive(List<int> nums) {
     final Set<int> resultSums = {}; // Set lưu tất cả các tổng hợp lệ
     nums = nums.where((e) => e > 0).toList(); // Lọc các số dương
-    nums.sort(); // Sắp xếp mảng
-
-    // Hàm đệ quy sinh tất cả các tập con không có số liên tiếp
+    nums.sort();
     void generateSubset(int index, List<int> subset) {
       if (index == nums.length) {
         if (subset.isNotEmpty) {
           final sorted = List<int>.from(subset)
             ..sort(); // Clone và sort lại subset
           bool hasConsecutive = false;
-          // Kiểm tra xem có số liên tiếp trong subset không
           for (int i = 1; i < sorted.length; i++) {
             if (sorted[i] == sorted[i - 1] + 1) {
               hasConsecutive = true;
@@ -293,25 +274,17 @@ smallest positive integer that cannot be represented as the sum of any subset
             }
           }
           if (!hasConsecutive) {
-            resultSums.add(sorted.reduce((a, b) =>
-                a + b)); // Thêm tổng vào Set nếu không có số liên tiếp
+            resultSums.add(sorted.reduce((a, b) => a + b));
           }
         }
         return;
       }
-
-      // Không chọn phần tử tại index
       generateSubset(index + 1, List<int>.from(subset));
-
-      // Chọn phần tử tại index và thêm vào subset
       final newSubset = List<int>.from(subset)..add(nums[index]);
       generateSubset(index + 1, newSubset);
     }
 
-    // Khởi động quá trình sinh tất cả các subset
     generateSubset(0, []);
-
-    // Tìm số dương nhỏ nhất không có trong resultSums
     int smallest = 1;
     while (resultSums.contains(smallest)) {
       smallest++;

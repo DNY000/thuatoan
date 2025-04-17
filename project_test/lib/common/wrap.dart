@@ -135,7 +135,7 @@ class WrapDemo extends StatelessWidget {
                             builder: (context) => GiaoDienListInt(
                               title: entry.key,
                               content: entry.value,
-                            ), // Truyền tiêu đề bài toán
+                            ),
                           ),
                         );
                       },
@@ -182,7 +182,7 @@ class WrapDemo extends StatelessWidget {
                                 : GiaoDienListInt(
                                     title: entry.key,
                                     content: entry.value,
-                                  ), // Truyền tiêu đề bài toán
+                                  ),
                           ),
                         );
                       },
